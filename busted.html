@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>السجل الجنائي الرقمي - مقفوش</title>
+    <meta
+      name="description"
+      content="السجل الجنائي الرقمي للمخالفين على شبكات التواصل الاجتماعي - منصة مقفوش"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800&family=Tajawal:wght@400;500;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Boxicons -->
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <!-- Navbar -->
+    <header class="navbar">
+      <div class="logo">
+        <a
+          href="index.html"
+          style="
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+          "
+        >
+          <i class="bx bxs-badge-check"></i>
+          <span>مقفوش</span>
+        </a>
+      </div>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="index.html">الرئيسية</a></li>
+        </ul>
+      </nav>
+      <div class="nav-actions">
+        <button id="theme-toggle" aria-label="Toggle Theme">
+          <i class="bx bx-moon"></i>
+        </button>
+      </div>
+    </header>
+
+    <main class="page-padding">
+      <section class="busted-database">
+        <div class="container">
+          <div class="database-header">
+            <h1>
+              <i class="bx bx-folder-open"></i> ملفات المطلوبين (قائمة مقفوش)
+            </h1>
+            <p>
+              هنا يتم إدراج الحسابات التي ثبت تورطها في سلوكيات مسيئة أو
+              احتيالية.
+            </p>
+          </div>
+
+          <div class="search-bar">
+            <input
+              type="text"
+              id="search-input"
+              placeholder="ابحث عن اسم، منصة، أو نوع مخالفة..."
+            />
+          </div>
+
+          <!-- Add New Record Form (Visible for editing) -->
+          <div
+            class="add-record-container"
+            style="
+              background: var(--card-bg);
+              padding: 2rem;
+              border-radius: 12px;
+              margin-bottom: 2rem;
+              border: 1px solid var(--border-color);
+            "
+          >
+            <h3 style="margin-bottom: 1rem; color: var(--primary)">
+              إضافة مخالِف جديد
+            </h3>
+            <form
+              id="add-busted-form"
+              style="display: grid; gap: 1rem; grid-template-columns: 1fr 1fr"
+            >
+              <input
+                type="text"
+                id="busted-name"
+                placeholder="الاسم / الوصف السريع"
+                required
+                style="
+                  padding: 0.75rem;
+                  border: 1px solid var(--border-color);
+                  border-radius: 8px;
+                  background: var(--bg-alt);
+                  color: var(--text-main);
+                "
+              />
+              <select
+                id="busted-platform"
+                class="form-select"
+                required
+                style="
+                  padding: 0.75rem;
+                  border: 1px solid var(--border-color);
+                  border-radius: 8px;
+                  background: var(--bg-alt);
+                  color: var(--text-main);
+                  cursor: pointer;
+                "
+              >
+                <option value="" disabled selected>اتقفش فين؟ (المنصة)</option>
+                <option value="Facebook|facebook">Facebook</option>
+                <option value="Instagram|instagram">Instagram</option>
+                <option value="LinkedIn|linkedin">LinkedIn</option>
+                <option value="Haram Blur|haram">Haram Blur (هرم بلير)</option>
+                <option value="Almdrasa|almdrasa">Almdrasa (المدرسة)</option>
+              </select>
+              <div class="file-upload-wrapper" style="grid-column: span 2">
+                <label
+                  style="
+                    display: block;
+                    margin-bottom: 0.5rem;
+                    font-weight: 600;
+                  "
+                  >ارفع سكرينات الإدانة (اختياري)</label
+                >
+                <div
+                  id="dropzone"
+                  class="dropzone"
+                  style="
+                    width: 100%;
+                    padding: 2rem;
+                    text-align: center;
+                    border: 2px dashed var(--border-color);
+                    border-radius: 8px;
+                    background: var(--bg-alt);
+                    color: var(--text-muted);
+                    cursor: pointer;
+                    transition: var(--transition);
+                  "
+                >
+                  <i
+                    class="bx bx-image-add"
+                    style="
+                      font-size: 3rem;
+                      margin-bottom: 0.5rem;
+                      color: var(--primary);
+                    "
+                  ></i>
+                  <p style="margin: 0; font-weight: 600">
+                    ارمي السكرينات هنا (Drag & Drop)
+                  </p>
+                  <p style="margin: 0; font-size: 0.85rem">
+                    أو اضغط لاختيار الصور
+                  </p>
+                  <input
+                    type="file"
+                    id="busted-image"
+                    accept="image/*"
+                    multiple
+                    style="display: none"
+                  />
+                </div>
+                <div
+                  id="image-preview-container"
+                  style="
+                    display: flex;
+                    gap: 0.5rem;
+                    flex-wrap: wrap;
+                    margin-top: 1rem;
+                  "
+                ></div>
+              </div>
+              <textarea
+                id="busted-desc"
+                placeholder="تفاصيل التهمة (أدهم بيكتب إيه في المحضر؟)..."
+                required
+                style="
+                  grid-column: span 2;
+                  padding: 0.75rem;
+                  border: 1px solid var(--border-color);
+                  border-radius: 8px;
+                  background: var(--bg-alt);
+                  color: var(--text-main);
+                  min-height: 100px;
+                  resize: vertical;
+                "
+              ></textarea>
+              <button
+                type="submit"
+                class="btn btn-danger"
+                style="grid-column: span 2"
+              >
+                إضافة للسجل الجنائي
+              </button>
+            </form>
+          </div>
+
+          <div class="busts-grid" id="full-busted-list">
+            <!-- JS will populate or we can put static ones for now -->
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="container">
+        <div class="copyright">
+          <p>&copy; 2026 جميع الحقوق محفوظة لمنصة مقفوش.</p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Lightbox for Image Amplification -->
+    <div id="lightbox" class="lightbox" onclick="closeLightbox(event)">
+      <span class="lightbox-close" onclick="closeLightbox(event)">&times;</span>
+      <button
+        id="lightbox-prev"
+        class="lightbox-nav"
+        onclick="changeLightboxSlide(-1)"
+        style="display: none"
+      >
+        <i class="bx bx-chevron-right"></i>
+      </button>
+      <img class="lightbox-content" id="lightbox-img" />
+      <button
+        id="lightbox-next"
+        class="lightbox-nav"
+        onclick="changeLightboxSlide(1)"
+        style="display: none"
+      >
+        <i class="bx bx-chevron-left"></i>
+      </button>
+      <div
+        id="lightbox-counter"
+        style="
+          position: absolute;
+          bottom: 20px;
+          left: 50%;
+          transform: translateX(-50%);
+          color: white;
+          background: rgba(0, 0, 0, 0.6);
+          padding: 5px 15px;
+          border-radius: 20px;
+          display: none;
+          font-weight: bold;
+          font-family: inherit;
+        "
+      ></div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
