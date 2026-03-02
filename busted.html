@@ -104,26 +104,65 @@
                   color: var(--text-main);
                 "
               />
-              <select
-                id="busted-platform"
-                class="form-select"
-                required
-                style="
-                  padding: 0.75rem;
-                  border: 1px solid var(--border-color);
-                  border-radius: 8px;
-                  background: var(--bg-alt);
-                  color: var(--text-main);
-                  cursor: pointer;
-                "
-              >
+              <!-- Hidden native select for form submission -->
+              <select id="busted-platform" required style="display: none">
                 <option value="" disabled selected>اتقفش فين؟ (المنصة)</option>
                 <option value="Facebook|facebook">Facebook</option>
                 <option value="Instagram|instagram">Instagram</option>
                 <option value="LinkedIn|linkedin">LinkedIn</option>
-                <option value="Haram Blur|haram">Haram Blur (هرم بلير)</option>
+                <option value="Haram Blur|haram">Haram Blur (حرام بلير)</option>
                 <option value="Almdrasa|almdrasa">Almdrasa (المدرسة)</option>
               </select>
+              <!-- Custom styled dropdown -->
+              <div class="custom-select" id="custom-platform-select">
+                <div class="custom-select__trigger">
+                  <span class="custom-select__text">اتقفش فين؟ (المنصة)</span>
+                  <i class="bx bx-chevron-down custom-select__arrow"></i>
+                </div>
+                <div class="custom-select__options">
+                  <div
+                    class="custom-select__option"
+                    data-value="Facebook|facebook"
+                  >
+                    <i
+                      class="bx bxl-facebook-circle"
+                      style="color: #1877f2"
+                    ></i>
+                    <span>Facebook</span>
+                  </div>
+                  <div
+                    class="custom-select__option"
+                    data-value="Instagram|instagram"
+                  >
+                    <i class="bx bxl-instagram-alt" style="color: #e1306c"></i>
+                    <span>Instagram</span>
+                  </div>
+                  <div
+                    class="custom-select__option"
+                    data-value="LinkedIn|linkedin"
+                  >
+                    <i
+                      class="bx bxl-linkedin-square"
+                      style="color: #0a66c2"
+                    ></i>
+                    <span>LinkedIn</span>
+                  </div>
+                  <div
+                    class="custom-select__option"
+                    data-value="Haram Blur|haram"
+                  >
+                    <i class="bx bx-video" style="color: #fbbf24"></i>
+                    <span>Haram Blur (هرم بلير)</span>
+                  </div>
+                  <div
+                    class="custom-select__option"
+                    data-value="Almdrasa|almdrasa"
+                  >
+                    <i class="bx bx-book-reader" style="color: #10b981"></i>
+                    <span>Almdrasa (المدرسة)</span>
+                  </div>
+                </div>
+              </div>
               <div class="file-upload-wrapper" style="grid-column: span 2">
                 <label
                   style="

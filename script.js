@@ -88,6 +88,51 @@ if (hamburger && navLinksContainer) {
   });
 }
 
+// Custom Dropdown Logic
+const customSelect = document.getElementById("custom-platform-select");
+const nativeSelect = document.getElementById("busted-platform");
+
+if (customSelect && nativeSelect) {
+  const trigger = customSelect.querySelector(".custom-select__trigger");
+  const textEl = customSelect.querySelector(".custom-select__text");
+  const options = customSelect.querySelectorAll(".custom-select__option");
+
+  // Toggle dropdown on trigger click
+  trigger.addEventListener("click", (e) => {
+    e.stopPropagation();
+    customSelect.classList.toggle("open");
+  });
+
+  // Option click handler
+  options.forEach((opt) => {
+    opt.addEventListener("click", () => {
+      const value = opt.getAttribute("data-value");
+      const label = opt.querySelector("span").textContent;
+
+      // Update display text
+      textEl.textContent = label;
+      customSelect.classList.add("has-value");
+
+      // Sync hidden native select
+      nativeSelect.value = value;
+
+      // Mark selected option
+      options.forEach((o) => o.classList.remove("selected"));
+      opt.classList.add("selected");
+
+      // Close dropdown
+      customSelect.classList.remove("open");
+    });
+  });
+
+  // Close on outside click
+  document.addEventListener("click", (e) => {
+    if (!customSelect.contains(e.target)) {
+      customSelect.classList.remove("open");
+    }
+  });
+}
+
 // Global Data
 let bustedData = JSON.parse(localStorage.getItem("bustedData")) || [];
 
@@ -353,6 +398,17 @@ if (bustedListContainer) {
         addForm.reset();
         uploadedImagesBase64 = [];
         if (previewContainer) previewContainer.innerHTML = "";
+
+        // Reset custom dropdown
+        const cSelect = document.getElementById("custom-platform-select");
+        if (cSelect) {
+          cSelect.classList.remove("has-value");
+          cSelect.querySelector(".custom-select__text").textContent =
+            "اتقفش فين؟ (المنصة)";
+          cSelect
+            .querySelectorAll(".custom-select__option")
+            .forEach((o) => o.classList.remove("selected"));
+        }
       }
     });
   }
